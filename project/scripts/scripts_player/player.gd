@@ -16,18 +16,22 @@ func _physics_process(delta):
 	# animation based on user input and direction of sprite
 	if is_on_wall():
 		if sprite_dir == "left" and test_move(transform, Vector2(-1,0)):
-			anim_switch("push")
+			anim_switch("push_left")
 		if sprite_dir == "right" and test_move(transform, Vector2(1,0)):
-			anim_switch("push")
+			anim_switch("push_right")
 		if sprite_dir == "up" and test_move(transform, Vector2(0,-1)):
-			anim_switch("push")
+			anim_switch("push_up")
 		if sprite_dir == "down" and test_move(transform, Vector2(0,1)):
-			anim_switch("push")
+			anim_switch("push_down")
+			
+		# resolve bug where on wall, but not moving
+		if move_dir == Vector2(0,0):
+			anim_switch("idle_" + sprite_dir)
 	# toggle walk/idle animation based on user input
 	elif move_dir != Vector2(0,0):
-		anim_switch("walk")
+		anim_switch("walk_" + sprite_dir)
 	else:
-		anim_switch("idle")
+		anim_switch("idle_" + sprite_dir)
 		
 		
 
@@ -57,11 +61,10 @@ func sprite_dir_loop():
 		# if move direction is up, then sprite is facing up
 		Vector2(0,-1):
 			sprite_dir = "up"
-		# Match default (denoted as _) is facing down
-		_:
+		# if move direction is down, then sprite is facing down
+		Vector2(0,1):
 			sprite_dir = "down"
 
-func anim_switch(animation):
-	var new_anim = str(animation.sprite_dir)
-	if $animation_player.current_animation != new_anim:
-		$animation_player.play(new_anim)
+func anim_switch(animation_status):
+	if $animation_player.current_animation != animation_status:
+		$animation_player.play(animation_status)
