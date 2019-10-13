@@ -1,10 +1,8 @@
-extends KinematicBody2D
+extends "res://scripts/scripts_engine/entity.gd"
 
-const SPEED = 250
-
-var move_dir = Vector2(0,0)
-
-var sprite_dir = "down"
+# initialize player health/speed inherited from entity.gd
+func _init().(250, 100):
+	pass
 
 # every time loop, run this function
 func _physics_process(delta):
@@ -45,26 +43,3 @@ func control_loop():
 	move_dir.x	= -int(LEFT) + int(RIGHT)
 	move_dir.y	= -int(UP) + int(DOWN)
 
-func movement_loop():
-	var motion = move_dir.normalized() * SPEED
-	move_and_slide(motion, Vector2(0,0))
-
-func sprite_dir_loop():
-	# match is similar like switch-statements (series of if-statements)
-	match move_dir:
-		# if move direction is left, then sprite is facing left
-		Vector2(-1,0):
-			sprite_dir = "left"
-		# if move direction is right, then sprite is facing right
-		Vector2(1,0):
-			sprite_dir = "right"
-		# if move direction is up, then sprite is facing up
-		Vector2(0,-1):
-			sprite_dir = "up"
-		# if move direction is down, then sprite is facing down
-		Vector2(0,1):
-			sprite_dir = "down"
-
-func anim_switch(animation_status):
-	if $animation_player.current_animation != animation_status:
-		$animation_player.play(animation_status)

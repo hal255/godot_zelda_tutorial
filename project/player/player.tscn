@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/graphics/player.png" type="Texture" id=1]
 [ext_resource path="res://scripts/scripts_player/player.gd" type="Script" id=2]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "idle_down"
 loop = true
 step = 0.5
@@ -20,7 +20,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "idle_left"
 step = 0.5
 tracks/0/type = "value"
@@ -36,7 +36,7 @@ tracks/0/keys = {
 "values": [ 7 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 resource_name = "idle_right"
 step = 0.5
 tracks/0/type = "value"
@@ -52,7 +52,7 @@ tracks/0/keys = {
 "values": [ 5 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 resource_name = "idle_up"
 step = 0.5
 tracks/0/type = "value"
@@ -68,7 +68,7 @@ tracks/0/keys = {
 "values": [ 2 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 resource_name = "push_down"
 loop = true
 step = 0.5
@@ -85,7 +85,7 @@ tracks/0/keys = {
 "values": [ 8, 9 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=6]
 resource_name = "push_left"
 loop = true
 step = 0.5
@@ -102,7 +102,7 @@ tracks/0/keys = {
 "values": [ 14, 15 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=7]
 resource_name = "push_right"
 loop = true
 step = 0.5
@@ -119,7 +119,7 @@ tracks/0/keys = {
 "values": [ 12, 13 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=8]
 resource_name = "push_up"
 step = 0.5
 tracks/0/type = "value"
@@ -135,7 +135,7 @@ tracks/0/keys = {
 "values": [ 10, 11 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=9]
 resource_name = "walk_down"
 loop = true
 step = 0.5
@@ -152,7 +152,7 @@ tracks/0/keys = {
 "values": [ 0, 1 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=10]
 resource_name = "walk_left"
 loop = true
 step = 0.5
@@ -169,7 +169,7 @@ tracks/0/keys = {
 "values": [ 6, 7 ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=11]
 resource_name = "walk_right"
 loop = true
 step = 0.5
@@ -186,7 +186,7 @@ tracks/0/keys = {
 "values": [ 4, 5 ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=12]
 resource_name = "walk_up"
 loop = true
 step = 0.5
@@ -203,7 +203,7 @@ tracks/0/keys = {
 "values": [ 2, 3 ]
 }
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=13]
 extents = Vector2( 16, 16 )
 
 [node name="player" type="KinematicBody2D"]
@@ -212,18 +212,18 @@ script = ExtResource( 2 )
 
 [node name="animation_player" type="AnimationPlayer" parent="."]
 playback_speed = 4.0
-anims/idle_down = SubResource( 2 )
-anims/idle_left = SubResource( 3 )
-anims/idle_right = SubResource( 4 )
-anims/idle_up = SubResource( 5 )
-anims/push_down = SubResource( 6 )
-anims/push_left = SubResource( 7 )
-anims/push_right = SubResource( 8 )
-anims/push_up = SubResource( 9 )
-anims/walk_down = SubResource( 10 )
-anims/walk_left = SubResource( 11 )
-anims/walk_right = SubResource( 12 )
-anims/walk_up = SubResource( 13 )
+anims/idle_down = SubResource( 1 )
+anims/idle_left = SubResource( 2 )
+anims/idle_right = SubResource( 3 )
+anims/idle_up = SubResource( 4 )
+anims/push_down = SubResource( 5 )
+anims/push_left = SubResource( 6 )
+anims/push_right = SubResource( 7 )
+anims/push_up = SubResource( 8 )
+anims/walk_down = SubResource( 9 )
+anims/walk_left = SubResource( 10 )
+anims/walk_right = SubResource( 11 )
+anims/walk_up = SubResource( 12 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
@@ -235,8 +235,8 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2( 0.5, 0.6 )
-shape = SubResource( 1 )
+scale = Vector2( 0.4, 0.5 )
+shape = SubResource( 13 )
 __meta__ = {
 "_edit_lock_": true
 }

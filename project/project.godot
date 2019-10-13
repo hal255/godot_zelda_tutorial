@@ -19,6 +19,10 @@ config/name="godot_zelda_tutorial"
 run/main_scene="res://scenes/scene01/Scene01.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+engine_directions="*res://scripts/scripts_engine/directions.gd"
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
