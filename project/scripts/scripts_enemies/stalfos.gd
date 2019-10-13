@@ -1,7 +1,7 @@
 extends "res://scripts/scripts_engine/entity.gd"
 
-# initialize enemy health/speed inherited from entity.gd
-func _init().(250, 100):
+# initialize enemy attributes inherited from entity.gd
+func _init().(250, 100, "enemy", 1):
 	pass
 
 # forces enemy to switch random movement every 15 frames
@@ -15,6 +15,7 @@ func _ready():
 	
 func _physics_process(delta):
 	movement_loop()
+	damage_loop()
 	
 	if move_timer > 0:
 		move_timer -= 1

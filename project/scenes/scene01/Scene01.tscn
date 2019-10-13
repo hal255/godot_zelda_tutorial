@@ -17,3 +17,9 @@ position = Vector2( 244.2, 153.35 )
 
 [node name="stalfos" parent="." instance=ExtResource( 3 )]
 position = Vector2( 96.4157, 136.734 )
+
+[node name="stalfos2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 149.449, 79.4578 )
+
+[node name="stalfos3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 116.922, 224.415 )

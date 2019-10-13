@@ -1,18 +1,32 @@
 extends KinematicBody2D
 
+var body_type = ""
 var speed = 0
 var health = 1
+var damage = 0
 
-var move_dir = Vector2(0,0)
-var sprite_dir = "down"
+var move_dir	= Vector2(0,0)		# direction of movement
+var knock_dir	= Vector2(0,0)		# direction of knockback when hit
+var sprite_dir	= "down"			# direction where sprite is facing
+
+# timer when entity is stunned when nonzero (unit: frames)
+var hit_stun = 0
+var hit_stun_max = 10
+var hit_stun_speed = 1.5
 
 # allow for character properties to be modified
-func _init(_speed = 0, _health=1).():
+func _init(_speed = 0, _health=1, _body_type="enemy", _damage=0).():
 	speed = _speed
 	health = _health
+	body_type = _body_type
+	damage = _damage
 
 func movement_loop():
-	var motion = move_dir.normalized() * speed
+	var motion
+	if hit_stun == 0:
+		motion = move_dir.normalized() * speed
+	else:
+		motion = knock_dir.normalized() * speed * hit_stun_speed
 	move_and_slide(motion, Vector2(0,0))
 
 func sprite_dir_loop():
@@ -34,3 +48,14 @@ func sprite_dir_loop():
 func anim_switch(animation_status):
 	if $animation_player.current_animation != animation_status:
 		$animation_player.play(animation_status)
+
+func damage_loop():
+	if hit_stun > 0:
+		hit_stun -= 1
+	# check colliding bodies, if different body_types then apply damage and hit stun
+	for body in $hitbox.get_overlapping_bodies():
+		if hit_stun == 0 and body.get("damage") != null and body.get("body_type") != body_type:
+			health -= body.get("damage")
+			hit_stun = hit_stun_max
+			knock_dir = transform.origin - body.transform.origin
+			

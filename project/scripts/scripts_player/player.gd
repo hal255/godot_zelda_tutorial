@@ -1,7 +1,7 @@
 extends "res://scripts/scripts_engine/entity.gd"
 
-# initialize player health/speed inherited from entity.gd
-func _init().(250, 100):
+# initialize player attributes inherited from entity.gd
+func _init().(250, 100, "player", 1):
 	pass
 
 # every time loop, run this function
@@ -9,6 +9,7 @@ func _physics_process(delta):
 	control_loop()
 	movement_loop()
 	sprite_dir_loop()
+	damage_loop()
 	
 	# animate push if collision is true from test_move
 	# animation based on user input and direction of sprite
