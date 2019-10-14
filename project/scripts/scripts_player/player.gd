@@ -1,11 +1,21 @@
 extends "res://scripts/scripts_engine/entity.gd"
 
+var state = "default"
+
 # initialize player attributes inherited from entity.gd
 func _init().(250, 100, "player", 1):
 	pass
 
 # every time loop, run this function
 func _physics_process(delta):
+	match state:
+		"default":
+			state_default()
+		"attack":
+			state_attack()
+
+# default state	
+func state_default():
 	control_loop()
 	movement_loop()
 	sprite_dir_loop()
@@ -35,6 +45,10 @@ func _physics_process(delta):
 	# if attack button is pressed, then load weapon
 	if Input.is_action_just_pressed("ui_attack"):
 		use_item(preload("res://items/weapons/sword.tscn"))
+
+func state_attack():
+	anim_switch("idle_" + sprite_dir)
+	damage_loop()
 
 func control_loop():
 	var LEFT	= Input.is_action_pressed("ui_left") or Input.is_key_pressed(KEY_A)
