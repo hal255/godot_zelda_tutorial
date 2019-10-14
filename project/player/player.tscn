@@ -213,7 +213,7 @@ extents = Vector2( 7, 9 )
 scale = Vector2( 2, 2 )
 script = ExtResource( 2 )
 
-[node name="animation_player" type="AnimationPlayer" parent="."]
+[node name="anim" type="AnimationPlayer" parent="."]
 playback_speed = 4.0
 anims/idle_down = SubResource( 1 )
 anims/idle_left = SubResource( 2 )
@@ -232,7 +232,6 @@ anims/walk_up = SubResource( 12 )
 texture = ExtResource( 1 )
 vframes = 2
 hframes = 8
-frame = 1
 __meta__ = {
 "_edit_lock_": true
 }

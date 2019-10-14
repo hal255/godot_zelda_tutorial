@@ -9,7 +9,7 @@ var move_timer_length = 15
 var move_timer = 0
 
 func _ready():
-	$animation_player.play("move_down")
+	$anim.play("move_down")
 	# set move direction as the randomly generated direction from engine
 	move_dir = engine_directions.rand_dir()
 	

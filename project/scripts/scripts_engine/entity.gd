@@ -46,8 +46,8 @@ func sprite_dir_loop():
 			sprite_dir = "down"
 
 func anim_switch(animation_status):
-	if $animation_player.current_animation != animation_status:
-		$animation_player.play(animation_status)
+	if $anim.current_animation != animation_status:
+		$anim.play(animation_status)
 
 func damage_loop():
 	if hit_stun > 0:
@@ -57,5 +57,12 @@ func damage_loop():
 		if hit_stun == 0 and body.get("damage") != null and body.get("body_type") != body_type:
 			health -= body.get("damage")
 			hit_stun = hit_stun_max
-			knock_dir = transform.origin - body.transform.origin
+			knock_dir = transform.get_origin() - body.transform.get_origin()
 			
+func use_item(item):
+	var new_item = item.instance()		# creates new instance of item
+	new_item.add_to_group(str(new_item.get_name(), self))	# adds new_item entity to a group
+	add_child(new_item)
+	if get_tree().get_nodes_in_group(str(new_item.get_name(), self)).size() > new_item.max_amount:
+		new_item.queue_free()
+

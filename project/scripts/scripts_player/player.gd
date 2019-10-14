@@ -32,7 +32,9 @@ func _physics_process(delta):
 	else:
 		anim_switch("idle_" + sprite_dir)
 		
-		
+	# if attack button is pressed, then load weapon
+	if Input.is_action_just_pressed("ui_attack"):
+		use_item(preload("res://items/weapons/sword.tscn"))
 
 func control_loop():
 	var LEFT	= Input.is_action_pressed("ui_left") or Input.is_key_pressed(KEY_A)

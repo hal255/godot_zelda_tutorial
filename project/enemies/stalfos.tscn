@@ -30,7 +30,7 @@ extents = Vector2( 8, 9 )
 scale = Vector2( 2, 2 )
 script = ExtResource( 2 )
 
-[node name="animation_player" type="AnimationPlayer" parent="."]
+[node name="anim" type="AnimationPlayer" parent="."]
 playback_speed = 4.0
 anims/move_down = SubResource( 1 )
 
