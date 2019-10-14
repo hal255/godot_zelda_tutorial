@@ -52,12 +52,14 @@ func anim_switch(animation_status):
 func damage_loop():
 	if hit_stun > 0:
 		hit_stun -= 1
-	# check colliding bodies, if different body_types then apply damage and hit stun
-	for body in $hitbox.get_overlapping_bodies():
+
+	# check colliding areas, if different body_types then apply damage and hit_stun
+	for area in $hitbox.get_overlapping_areas():
+		var body = area.get_parent()
 		if hit_stun == 0 and body.get("damage") != null and body.get("body_type") != body_type:
 			health -= body.get("damage")
 			hit_stun = hit_stun_max
-			knock_dir = transform.get_origin() - body.transform.get_origin()
+			knock_dir = global_transform.get_origin() - body.global_transform.get_origin()
 			
 func use_item(item):
 	var new_item = item.instance()		# creates new instance of item

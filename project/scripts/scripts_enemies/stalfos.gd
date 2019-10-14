@@ -1,7 +1,7 @@
 extends "res://scripts/scripts_engine/entity.gd"
 
 # initialize enemy attributes inherited from entity.gd
-func _init().(250, 100, "enemy", 1):
+func _init().(125, 100, "enemy", 1):
 	pass
 
 # forces enemy to switch random movement every 15 frames
