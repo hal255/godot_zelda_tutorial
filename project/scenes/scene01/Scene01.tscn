@@ -20,3 +20,9 @@ position = Vector2( 118, 96 )
 
 [node name="stalfos2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 108, 187 )
+
+[node name="stalfos3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 190, 249 )
+
+[node name="stalfos4" parent="." instance=ExtResource( 3 )]
+position = Vector2( 201, 66 )

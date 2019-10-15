@@ -1,9 +1,12 @@
 extends "res://scripts/scripts_engine/entity.gd"
 
-var state = "default"
+var state 		= "default"
+var _speed 		= 250
+var _health 	= 100
+var _body_type 	= "player"
 
-# initialize player attributes inherited from entity.gd
-func _init().(250, 100, "player", null):
+# initialize player attributes inherited from entity._init()
+func _init().(_speed, _health, _body_type, null):
 	pass
 
 # every time loop, run this function
@@ -46,10 +49,14 @@ func state_default():
 	if Input.is_action_just_pressed("ui_attack"):
 		use_item(preload("res://items/weapons/sword.tscn"))
 
-# if attack state, then restrict movement
 func state_attack():
+	# if attack, then restrict movement
 	anim_switch("idle_" + sprite_dir)
 	damage_loop()
+	
+	# if getting damaged while attacking, then allow getting knocked back
+	movement_loop()
+	move_dir = engine_directions.center
 
 func control_loop():
 	var LEFT	= Input.is_action_pressed("ui_left") or Input.is_key_pressed(KEY_A)

@@ -1,7 +1,7 @@
 extends Node2D
 
 var body_type 	= null
-var damage 		= 1
+var damage 		= 25
 var max_amount 	= 1		# max amount in screen
 
 func _ready():

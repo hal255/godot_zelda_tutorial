@@ -1,18 +1,27 @@
 extends KinematicBody2D
 
-var body_type = ""
-var speed = 0
-var health = 1
-var damage = 0
+const knock_speed = 400	# knock back distance
+
+var body_type 	= ""
+var speed 		= 0
+var health 		= 1
+var damage 		= 0
 
 var move_dir	= Vector2(0,0)		# direction of movement
 var knock_dir	= Vector2(0,0)		# direction of knockback when hit
 var sprite_dir	= "down"			# direction where sprite is facing
 
 # timer when entity is stunned when nonzero (unit: frames)
-var hit_stun = 0
-var hit_stun_max = 10
-var hit_stun_speed = 1.5
+var hit_stun 		= 0
+var hit_stun_max 	= 10
+var hit_stun_speed 	= 1.5
+
+var texture_default = null
+var texture_hurt 	= null
+
+func _ready():
+	texture_default = $Sprite.texture
+	texture_hurt	= load($Sprite.texture.get_path().replace(".png", "_hurt.png"))
 
 # allow for character properties to be modified
 func _init(_speed = 0, _health=1, _body_type="enemy", _damage=0).():
@@ -26,7 +35,7 @@ func movement_loop():
 	if hit_stun == 0:
 		motion = move_dir.normalized() * speed
 	else:
-		motion = knock_dir.normalized() * speed * hit_stun_speed
+		motion = knock_dir.normalized() * knock_speed
 	move_and_slide(motion, Vector2(0,0))
 
 func sprite_dir_loop():
@@ -50,8 +59,23 @@ func anim_switch(animation_status):
 		$anim.play(animation_status)
 
 func damage_loop():
+	# if character is hit, stun it and play hurt texture
 	if hit_stun > 0:
 		hit_stun -= 1
+		$Sprite.texture = texture_hurt
+	else:
+		$Sprite.texture = texture_default
+		
+		# remove character if dead
+		if health <= 0:
+			# create instance of death animation
+			var death_animation = preload("res://enemies/enemy_death.tscn").instance()
+			# add death animation to parent
+			get_parent().add_child(death_animation)
+			# use global positions to death anim
+			death_animation.global_transform = global_transform	
+			# remove character
+			queue_free()
 
 	# check colliding areas, if different body_types then apply damage and hit_stun
 	for area in $hitbox.get_overlapping_areas():
